@@ -17,7 +17,7 @@ index db18f70ec37253232fb2cfd08ccd07d13c7c457d..be92b1a3e062cb7c54d5a1ea83ea2243
      int getViewDistance();
      // Spigot end
  
-+    // Tuinity start - view distance api
++    // leo start - view distance api
 +    /**
 +     * Sets the view distance for this world.
 +     * @param viewDistance view distance in [2, 32]
@@ -43,7 +43,7 @@ index db18f70ec37253232fb2cfd08ccd07d13c7c457d..be92b1a3e062cb7c54d5a1ea83ea2243
 +     * @param viewDistance view distance in [2, 32]
 +     */
 +    void setNoTickViewDistance(int viewDistance);
-+    // Tuinity end - view distance api
++    // leo end - view distance api
 +
      // Spigot start
      public class Spigot {
@@ -56,7 +56,7 @@ index 877ea4f323a84fa3c0a93c93f3d8395661b5ed3c..5367975ac1c60449581b0cdaf9790786
      void resetCooldown();
      // Paper end
  
-+    // Tuinity start
++    // leo start
 +    /**
 +     * Returns the no-tick view distance for this player.
 +     * <p>
@@ -77,7 +77,7 @@ index 877ea4f323a84fa3c0a93c93f3d8395661b5ed3c..5367975ac1c60449581b0cdaf9790786
 +     * @param viewDistance view distance in [2, 32] or -1
 +     */
 +    void setNoTickViewDistance(int viewDistance);
-+    // Tuinity end
++    // leo end
 +
      // Spigot start
      public class Spigot extends Entity.Spigot {

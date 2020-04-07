@@ -113,6 +113,6 @@ importLibrary com.mojang datafixerupper com/mojang/datafixers/util Either.java
     cd Paper/Paper-Server/
     rm -rf nms-patches
     git add src -A
-    echo -e "Tuinity-Extra mc-dev Imports\n\n$MODLOG" | git commit src -F -
+    echo -e "leo-Extra mc-dev Imports\n\n$MODLOG" | git commit src -F -
     exit 0
 )

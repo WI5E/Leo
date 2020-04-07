@@ -83,10 +83,10 @@ case "$1" in
         cd "$basedir"
     ;;
     "a" | "api")
-        cd "$basedir/Tuinity-API"
+        cd "$basedir/leo-API"
     ;;
     "s" | "server")
-        cd "$basedir/Tuinity-Server"
+        cd "$basedir/leo-Server"
     ;;
     "setup")
         if [[ -f ~/.bashrc ]] ; then
@@ -100,7 +100,7 @@ case "$1" in
         fi
     ;;
     *)
-        echo "Tuinity build tool command. This provides a variety of commands to build and manage the PaperMC build"
+        echo "leo build tool command. This provides a variety of commands to build and manage the PaperMC build"
         echo "environment. For all of the functionality of this command to be available, you must first run the"
         echo "'setup' command. View below for details. For essential building and patching, you do not need to do the setup."
         echo ""
@@ -120,11 +120,11 @@ case "$1" in
         echo "                 | the changes have been made to finish and rebuild patches. Can be called from anywhere."
         echo ""
         echo "  * setup        | Add an alias to .bashrc to allow full functionality of this script. Run as:"
-        echo "                 |     . ./tuinity setup"
-        echo "                 | After you run this command you'll be able to just run 'tuinity' from anywhere."
-        echo "                 | The default name for the resulting alias is 'tuinity', you can give an argument to override"
+        echo "                 |     . ./leo setup"
+        echo "                 | After you run this command you'll be able to just run 'leo' from anywhere."
+        echo "                 | The default name for the resulting alias is 'leo', you can give an argument to override"
         echo "                 | this default, such as:"
-        echo "                 |     . ./tuinity setup example"
+        echo "                 |     . ./leo setup example"
         echo "                 | Which will allow you to run 'example' instead."
     ;;
 esac

@@ -13,7 +13,7 @@ index cf00f35a5b7c2d2f6b6989e0855de8b882dcef50..e54730f097ffbfe1e597f6a74a84c4a9
  
                      properties.setProperty("eula", "false");
 -                    properties.store(outputstream, "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).\nYou also agree that tacos are tasty, and the best food in the world.");  // Paper - fix lag;
-+                    properties.store(outputstream, "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).");  // Paper - fix lag; // Tuinity - Tacos are disgusting
++                    properties.store(outputstream, "By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).");  // Paper - fix lag; // leo - Tacos are disgusting
                  } catch (Throwable throwable1) {
                      throwable = throwable1;
                      throw throwable1;
@@ -26,7 +26,7 @@ index c9deaffc4a317c8ec75d9e6ef5889ab909e2fbe8..e05d909b90102466e4d67abc4defa2e4
  
      public String getServerModName() {
 -        return "Paper"; //Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
-+        return "Tuinity"; // Tuinity //Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "leo"; // leo //Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
      }
  
      public CrashReport b(CrashReport crashreport) {
@@ -39,7 +39,7 @@ index b9a398bc577b16317057d70bb43a261b078d67a9..ceff951da857a8a0db4ea7600a81b3a2
  
  public final class CraftServer implements Server {
 -    private final String serverName = "Paper"; // Paper
-+    private final String serverName = "Tuinity"; // Paper // Tuinity
++    private final String serverName = "leo"; // Paper // leo
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");

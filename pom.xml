@@ -1,18 +1,18 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tuinity</groupId>
-    <artifactId>tuinity-parent</artifactId>
+    <groupId>com.leo</groupId>
+    <artifactId>leo-parent</artifactId>
     <version>dev-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Tuinity (Parent)</name>
+    <name>leo (Parent)</name>
 
     <build>
         <defaultGoal>install</defaultGoal>
         <finalName>${project.artifactId}</finalName>
     </build>
     <modules>
-        <module>Tuinity-API</module>
-        <module>Tuinity-Server</module>
+        <module>leo-API</module>
+        <module>leo-Server</module>
     </modules>
 </project>

@@ -1,16 +1,16 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Spottedleaf <Spottedleaf@users.noreply.github.com>
 Date: Sun, 3 Mar 2019 18:25:06 -0800
-Subject: [PATCH] Tuinity Server Config
+Subject: [PATCH] leo Server Config
 
 
-diff --git a/src/main/java/com/tuinity/tuinity/config/TuinityConfig.java b/src/main/java/com/tuinity/tuinity/config/TuinityConfig.java
+diff --git a/src/main/java/com/leo/leo/config/leoConfig.java b/src/main/java/com/leo/leo/config/leoConfig.java
 new file mode 100644
 index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627ba3ddc7da
 --- /dev/null
-+++ b/src/main/java/com/tuinity/tuinity/config/TuinityConfig.java
++++ b/src/main/java/com/leo/leo/config/leoConfig.java
 @@ -0,0 +1,219 @@
-+package com.tuinity.tuinity.config;
++package com.leo.leo.config;
 +
 +import ca.spottedleaf.concurrentutil.util.Throw;
 +import org.bukkit.Bukkit;
@@ -23,9 +23,9 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +import java.util.List;
 +import java.util.logging.Level;
 +
-+public final class TuinityConfig {
++public final class leoConfig {
 +
-+    public static final String CONFIG_HEADER = "Configuration file for Tuinity.";
++    public static final String CONFIG_HEADER = "Configuration file for leo.";
 +    public static final int CURRENT_CONFIG_VERSION = 1;
 +
 +    private static final Object[] EMPTY = new Object[0];
@@ -36,12 +36,12 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +
 +    public static void init(final File file) {
 +        // TODO remove this in the future...
-+        final File tuinityConfig = new File(file.getParent(), "tuinity.yml");
-+        if (!tuinityConfig.exists()) {
++        final File leoConfig = new File(file.getParent(), "leo.yml");
++        if (!leoConfig.exists()) {
 +            final File oldConfig = new File(file.getParent(), "concrete.yml");
-+            oldConfig.renameTo(tuinityConfig);
++            oldConfig.renameTo(leoConfig);
 +        }
-+        TuinityConfig.configFile = file;
++        leoConfig.configFile = file;
 +        final YamlConfiguration config = new YamlConfiguration();
 +        config.options().header(CONFIG_HEADER);
 +        config.options().copyDefaults(true);
@@ -50,27 +50,27 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +            try {
 +                file.createNewFile();
 +            } catch (final Exception ex) {
-+                Bukkit.getLogger().log(Level.SEVERE, "Failure to create tuinity config", ex);
++                Bukkit.getLogger().log(Level.SEVERE, "Failure to create leo config", ex);
 +            }
 +        } else {
 +            try {
 +                config.load(file);
 +            } catch (final Exception ex) {
-+                Bukkit.getLogger().log(Level.SEVERE, "Failure to load tuinity config", ex);
++                Bukkit.getLogger().log(Level.SEVERE, "Failure to load leo config", ex);
 +                Throw.rethrow(ex); /* Rethrow, this is critical */
 +                throw new RuntimeException(ex); // unreachable
 +            }
 +        }
 +
-+        TuinityConfig.load(config);
++        leoConfig.load(config);
 +    }
 +
 +    public static void load(final YamlConfiguration config) {
-+        TuinityConfig.config = config;
-+        TuinityConfig.configVersion = TuinityConfig.getInt("config-version-please-do-not-modify-me", CURRENT_CONFIG_VERSION);
-+        TuinityConfig.set("config-version-please-do-not-modify-me", CURRENT_CONFIG_VERSION);
++        leoConfig.config = config;
++        leoConfig.configVersion = leoConfig.getInt("config-version-please-do-not-modify-me", CURRENT_CONFIG_VERSION);
++        leoConfig.set("config-version-please-do-not-modify-me", CURRENT_CONFIG_VERSION);
 +
-+        for (final Method method : TuinityConfig.class.getDeclaredMethods()) {
++        for (final Method method : leoConfig.class.getDeclaredMethods()) {
 +            if (method.getReturnType() != void.class || method.getParameterCount() != 0 ||
 +                    !Modifier.isPrivate(method.getModifiers()) || !Modifier.isStatic(method.getModifiers())) {
 +                continue;
@@ -87,34 +87,34 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +
 +        /* We re-save to add new options */
 +        try {
-+            config.save(TuinityConfig.configFile);
++            config.save(leoConfig.configFile);
 +        } catch (final Exception ex) {
-+            Bukkit.getLogger().log(Level.SEVERE, "Unable to save tuinity config", ex);
++            Bukkit.getLogger().log(Level.SEVERE, "Unable to save leo config", ex);
 +        }
 +    }
 +
 +    static void set(final String path, final Object value) {
-+        TuinityConfig.config.set(path, value);
++        leoConfig.config.set(path, value);
 +    }
 +
 +    static boolean getBoolean(final String path, final boolean dfl) {
-+        TuinityConfig.config.addDefault(path, Boolean.valueOf(dfl));
-+        return TuinityConfig.config.getBoolean(path, dfl);
++        leoConfig.config.addDefault(path, Boolean.valueOf(dfl));
++        return leoConfig.config.getBoolean(path, dfl);
 +    }
 +
 +    static int getInt(final String path, final int dfl) {
-+        TuinityConfig.config.addDefault(path, Integer.valueOf(dfl));
-+        return TuinityConfig.config.getInt(path, dfl);
++        leoConfig.config.addDefault(path, Integer.valueOf(dfl));
++        return leoConfig.config.getInt(path, dfl);
 +    }
 +
 +    static long getLong(final String path, final long dfl) {
-+        TuinityConfig.config.addDefault(path, Long.valueOf(dfl));
-+        return TuinityConfig.config.getLong(path, dfl);
++        leoConfig.config.addDefault(path, Long.valueOf(dfl));
++        return leoConfig.config.getLong(path, dfl);
 +    }
 +
 +    static double getDouble(final String path, final double dfl) {
-+        TuinityConfig.config.addDefault(path, Double.valueOf(dfl));
-+        return TuinityConfig.config.getDouble(path, dfl);
++        leoConfig.config.addDefault(path, Double.valueOf(dfl));
++        return leoConfig.config.getDouble(path, dfl);
 +    }
 +
 +    public static final class WorldConfig {
@@ -129,17 +129,17 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +        }
 +
 +        public void init() {
-+            this.worldDefaults = TuinityConfig.config.getConfigurationSection("world-settings.default");
++            this.worldDefaults = leoConfig.config.getConfigurationSection("world-settings.default");
 +            if (this.worldDefaults == null) {
-+                this.worldDefaults = TuinityConfig.config.createSection("world-settings.default");
++                this.worldDefaults = leoConfig.config.createSection("world-settings.default");
 +            }
 +
-+            String worldSectionPath = TuinityConfig.configVersion < 1 ? this.worldName : "world-settings.".concat(this.worldName);
-+            ConfigurationSection section = TuinityConfig.config.getConfigurationSection(worldSectionPath);
++            String worldSectionPath = leoConfig.configVersion < 1 ? this.worldName : "world-settings.".concat(this.worldName);
++            ConfigurationSection section = leoConfig.config.getConfigurationSection(worldSectionPath);
 +            if (section == null) {
-+                section = TuinityConfig.config.createSection(worldSectionPath);
++                section = leoConfig.config.createSection(worldSectionPath);
 +            }
-+            TuinityConfig.config.set(worldSectionPath, section);
++            leoConfig.config.set(worldSectionPath, section);
 +
 +            this.load(section);
 +        }
@@ -147,7 +147,7 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +        public void load(final ConfigurationSection config) {
 +            this.config = config;
 +
-+            for (final Method method : TuinityConfig.WorldConfig.class.getDeclaredMethods()) {
++            for (final Method method : leoConfig.WorldConfig.class.getDeclaredMethods()) {
 +                if (method.getReturnType() != void.class || method.getParameterCount() != 0 ||
 +                        !Modifier.isPrivate(method.getModifiers()) || Modifier.isStatic(method.getModifiers())) {
 +                    continue;
@@ -162,17 +162,17 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +                }
 +            }
 +
-+            if (TuinityConfig.configVersion < 1) {
-+                ConfigurationSection oldSection = TuinityConfig.config.getConfigurationSection(this.worldName);
-+                TuinityConfig.config.set("world-settings.".concat(this.worldName), oldSection);
-+                TuinityConfig.config.set(this.worldName, null);
++            if (leoConfig.configVersion < 1) {
++                ConfigurationSection oldSection = leoConfig.config.getConfigurationSection(this.worldName);
++                leoConfig.config.set("world-settings.".concat(this.worldName), oldSection);
++                leoConfig.config.set(this.worldName, null);
 +            }
 +
 +            /* We re-save to add new options */
 +            try {
-+                TuinityConfig.config.save(TuinityConfig.configFile);
++                leoConfig.config.save(leoConfig.configFile);
 +            } catch (final Exception ex) {
-+                Bukkit.getLogger().log(Level.SEVERE, "Unable to save tuinity config", ex);
++                Bukkit.getLogger().log(Level.SEVERE, "Unable to save leo config", ex);
 +            }
 +        }
 +
@@ -189,7 +189,7 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +
 +        boolean getBoolean(final String path, final boolean dfl) {
 +            this.worldDefaults.addDefault(path, Boolean.valueOf(dfl));
-+            if (TuinityConfig.configVersion < 1) {
++            if (leoConfig.configVersion < 1) {
 +                if (this.config.getBoolean(path) == dfl) {
 +                    this.config.set(path, null);
 +                }
@@ -199,7 +199,7 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +
 +        int getInt(final String path, final int dfl) {
 +            this.worldDefaults.addDefault(path, Integer.valueOf(dfl));
-+            if (TuinityConfig.configVersion < 1) {
++            if (leoConfig.configVersion < 1) {
 +                if (this.config.getInt(path) == dfl) {
 +                    this.config.set(path, null);
 +                }
@@ -209,7 +209,7 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +
 +        long getLong(final String path, final long dfl) {
 +            this.worldDefaults.addDefault(path, Long.valueOf(dfl));
-+            if (TuinityConfig.configVersion < 1) {
++            if (leoConfig.configVersion < 1) {
 +                if (this.config.getLong(path) == dfl) {
 +                    this.config.set(path, null);
 +                }
@@ -219,7 +219,7 @@ index 0000000000000000000000000000000000000000..fb21ae58c9bf2ccb364477c941e5627b
 +
 +        double getDouble(final String path, final double dfl) {
 +            this.worldDefaults.addDefault(path, Double.valueOf(dfl));
-+            if (TuinityConfig.configVersion < 1) {
++            if (leoConfig.configVersion < 1) {
 +                if (this.config.getDouble(path) == dfl) {
 +                    this.config.set(path, null);
 +                }
@@ -238,7 +238,7 @@ index 1ef7890da599d13e784861035e7891efcc4cd504..eb5422dc4a33eeda62694bdab29c67c6
          com.destroystokyo.paper.PaperConfig.registerCommands();
          com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // load version history now
          // Paper end
-+        com.tuinity.tuinity.config.TuinityConfig.init((File) options.valueOf("tuinity-settings")); // Tuinity - Server Config
++        com.leo.leo.config.leoConfig.init((File) options.valueOf("leo-settings")); // leo - Server Config
  
          this.setSpawnAnimals(dedicatedserverproperties.spawnAnimals);
          this.setSpawnNPCs(dedicatedserverproperties.spawnNpcs);
@@ -250,7 +250,7 @@ index 549d975cb9df17d5979261b2f8e0bf2c6b996ea5..6c62446f24438fab0975efbd76ebe4ef
      public final com.destroystokyo.paper.PaperWorldConfig paperConfig; // Paper
      public final ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
  
-+    public final com.tuinity.tuinity.config.TuinityConfig.WorldConfig tuinityConfig; // Tuinity - Server Config
++    public final com.leo.leo.config.leoConfig.WorldConfig leoConfig; // leo - Server Config
 +
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
      public static BlockPosition lastPhysicsProblem; // Spigot
@@ -259,7 +259,7 @@ index 549d975cb9df17d5979261b2f8e0bf2c6b996ea5..6c62446f24438fab0975efbd76ebe4ef
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig( worlddata.getName() ); // Spigot
          this.paperConfig = new com.destroystokyo.paper.PaperWorldConfig(worlddata.getName(), this.spigotConfig); // Paper
          this.chunkPacketBlockController = this.paperConfig.antiXray ? new ChunkPacketBlockControllerAntiXray(this.paperConfig) : ChunkPacketBlockController.NO_OPERATION_INSTANCE; // Paper - Anti-Xray
-+        this.tuinityConfig = new com.tuinity.tuinity.config.TuinityConfig.WorldConfig(worlddata.getName()); // Tuinity - Server Config
++        this.leoConfig = new com.leo.leo.config.leoConfig.WorldConfig(worlddata.getName()); // leo - Server Config
          this.generator = gen;
          this.world = new CraftWorld((WorldServer) this, gen, env);
          this.ticksPerAnimalSpawns = this.getServer().getTicksPerAnimalSpawns(); // CraftBukkit
@@ -271,7 +271,7 @@ index ceff951da857a8a0db4ea7600a81b3a2c4ce7654..ca6468c245c6446ada97aaf983bede17
  
          org.spigotmc.SpigotConfig.init((File) console.options.valueOf("spigot-settings")); // Spigot
          com.destroystokyo.paper.PaperConfig.init((File) console.options.valueOf("paper-settings")); // Paper
-+        com.tuinity.tuinity.config.TuinityConfig.init((File) console.options.valueOf("tuinity-settings")); // Tuinity - Server Config
++        com.leo.leo.config.leoConfig.init((File) console.options.valueOf("leo-settings")); // leo - Server Config
          for (WorldServer world : console.getWorlds()) {
              world.worldData.setDifficulty(config.difficulty);
              world.setSpawnFlags(config.spawnMonsters, config.spawnAnimals);
@@ -279,7 +279,7 @@ index ceff951da857a8a0db4ea7600a81b3a2c4ce7654..ca6468c245c6446ada97aaf983bede17
              }
              world.spigotConfig.init(); // Spigot
              world.paperConfig.init(); // Paper
-+            world.tuinityConfig.init(); // Tuinity - Server Config
++            world.leoConfig.init(); // leo - Server Config
          }
  
          Plugin[] pluginClone = pluginManager.getPlugins().clone(); // Paper
@@ -287,13 +287,13 @@ index ceff951da857a8a0db4ea7600a81b3a2c4ce7654..ca6468c245c6446ada97aaf983bede17
              return com.destroystokyo.paper.PaperConfig.config;
          }
  
-+        // Tuinity start - add config to timings report
++        // leo start - add config to timings report
 +        @Override
-+        public YamlConfiguration getTuinityConfig()
++        public YamlConfiguration getleoConfig()
 +        {
-+            return com.tuinity.tuinity.config.TuinityConfig.config;
++            return com.leo.leo.config.leoConfig.config;
 +        }
-+        // Tuinity end - add config to timings report
++        // leo end - add config to timings report
 +
          @Override
          public void restart() {
@@ -306,11 +306,11 @@ index cb60310e63ce0f55f5e706edf9e1ef61a3732600..2666940e865db5a31dd8a61383f2d451
                          .defaultsTo(new File("paper.yml"))
                          .describedAs("Yml file");
                  // Paper end
-+                // Tuinity Start - Server Config
-+                acceptsAll(asList("tuinity", "tuinity-settings"), "File for tuinity settings")
++                // leo Start - Server Config
++                acceptsAll(asList("leo", "leo-settings"), "File for leo settings")
 +                        .withRequiredArg()
 +                        .ofType(File.class)
-+                        .defaultsTo(new File("tuinity.yml"))
++                        .defaultsTo(new File("leo.yml"))
 +                        .describedAs("Yml file");
 +                /* Conctete End - Server Config */
  
